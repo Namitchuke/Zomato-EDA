@@ -1,68 +1,83 @@
-# Zomato-EDA
-About Dataset
-The dataset provides a comprehensive view of the restaurant scene in the 13 metropolitan areas of India( 900 restaurants). Researchers, analysts, and food enthusiasts can use this dataset to gain insights into various aspects such as dining and delivery ratings, customer reviews and preferences, popular cuisines, best-selling items, and pricing information across different cities. It enables the exploration of dining patterns, the comparison of restaurants and cuisines between cities, and the identification of trends in the food industry. This dataset serves as a valuable resource for understanding the culinary landscape and making data-driven decisions related to the restaurant business, customer satisfaction, and food choices in these metropolitan areas of India. In this dataset, we have more than 123000 rows and 12 columns, a fairly large dataset. We will be able to get hands-on experience while performing the following tasks, and will be able to understand how real-world problem statement analysis is done.
+# 🔱 Zomato Metropolitan Restaurant Analytics — India
 
-**Link**:- [Kaggle](https://www.kaggle.com/datasets/narsingraogoud/zomato-restaurants-dataset-for-metropolitan-areas)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://zomato-eda-13.streamlit.app/)
+[![GitHub](https://img.shields.io/badge/GitHub-Profile-181717?style=flat&logo=github)](https://github.com/Namitchuke)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Expert-0A66C2?style=flat&logo=linkedin)](https://www.linkedin.com/in/namit-nitin-chuke/)
 
-**Columns:**
-* `Restaurant_Name`: Name of the restaurant.
-* `Dining_Rating`: Customer rating for dining experience.
-* `Delivery_Rating`: Customer rating for delivery service.
-* `Dining_Votes`: Number of votes for dining.
-* `Delivery_Votes`: Number of votes for delivery.
-* `Cuisine`: Type of cuisine served.
-* `Place_Name`: Specific locality of the restaurant.
-* `City`: City where the restaurant is located.
-* `Item_Name`: Name of the food item.
-* `Best_Seller`: Special tags like 'BESTSELLER' or 'MUST TRY'.
-* `Votes`: Number of votes for the specific item.
-* `Prices`: Price of the food item in INR.
+## 🚀 Live Dashboard
+Explore the interactive SaaS-style dashboard here: **[zomato-eda-13.streamlit.app](https://zomato-eda-13.streamlit.app/)**
 
 ---
 
-## 🛠️ Tools & Libraries
+## 📊 Project Overview
+This project delivers a **High-Performance Data Intelligence Dashboard** for analyzing the restaurant landscape across 13 Indian metropolitan areas. Leveraging a dataset of over **123,000+ rows**, the application provides actionable insights into pricing strategy, customer engagement, and operational efficiency.
 
-This analysis utilises the following Python libraries:
-* **`pandas`**: For data manipulation and analysis.
-* **`numpy`**: For numerical operations.
-* **`matplotlib` & `seaborn`**: For data visualization.
-* **`folium`**: For creating interactive geospatial maps.
+### 🎨 Design Philosophy (Professional SaaS Aesthetic)
+- **High-Contrast Dark Mode**: Optimized for clarity and long-form analysis session.
+- **Glassmorphism & Professional Iconography**: Custom SVG icon system replacing standard emojis for a premium look.
+- **Outfit Typography**: Modern, clean brand font for superior readability.
 
 ---
 
-##  Analysis Overview
+## 🛠️ Key Features
 
-The project follows a structured approach to analyze the data, from cleaning to drawing conclusions.
+### 1. **Data-Driven Market Intelligence**
+- **Geospatial Hotspots**: Interactive Folium maps visualizing restaurant density across India.
+- **Pricing Benchmarks**: Deep-dive into average item prices and high-value cuisines by city.
+- **Operational Performance**: Comparative analysis of Dining vs. Delivery ratings to identify logistics gaps.
 
-### 1. Data Cleaning & Preprocessing
-* **Handling Missing Values:** Null values in `Dining_Rating`, `Delivery_Rating`, and `Best_Seller` columns were identified and imputed. For instance, `NaN` in `Best_Seller` was replaced with "NA".
-* **Data Standardization:** Inconsistencies in the `City` column were resolved. For example, localities like 'Banaswadi' and 'Ulsoor' were correctly mapped to 'Bangalore'.
+### 2. **Strategic Forward Outlook**
+- **AI-Driven Personalization**: Roadmap for integrating dynamic pricing and predictive trend models.
+- **Tier-2 Expansion Strategy**: Identifying high-potential, low-competition hubs (Raipur, Lucknow).
+- **Logistics Templating**: Replicating high-performance delivery playbooks (Pune/Hyderabad) across the network.
 
-### 2. Feature Engineering
-New features were created to facilitate deeper analysis:
-* **`total_votes`**: The sum of `Dining_Votes` and `Delivery_Votes` to measure overall engagement.
-* **`Total_rating`**: The sum of `Dining_Rating` and `Delivery_Rating` to create a combined performance score.
+### 3. **Interactive Visualizations**
+- **Dynamic Charting**: Built with Plotly, featuring SI-abbreviated numbering (k, M) and responsive label handling.
+- **Insight Expanders**: Real-time business context provided alongside every data visualization.
 
-### 3. Exploratory Data Analysis (EDA)
-The core of the project involved answering key business questions through visualization:
-* **Restaurant Distribution:** Visualized the number of restaurants in each city to identify market size and saturation.
-* **Popularity Analysis:** Identified the top-rated and most frequently listed restaurants in each city.
-* **Price Analysis:** Compared average item prices across cities and identified the most and least expensive cuisines.
-* **Geospatial Analysis:** Plotted restaurant density on an interactive map of India using Folium to visualize regional hotspots.
-* **Customer Engagement:** Analyzed total delivery votes per city to gauge user activity.
-* **Menu Insights:** Examined the distribution of menu item categories like 'BESTSELLER' and 'MUST TRY'.
+---
 
+## 💻 Tech Stack
+- **Core**: Python 3.11+
+- **Analysis**: Pandas, NumPy
+- **Dashboard**: Streamlit (SaaS-styled Layout)
+- **Visualization**: Plotly Express, Plotly Graph Objects
+- **Mapping**: Folium, Streamlit-Folium
+- **Deployment**: Streamlit Community Cloud
 
-##  Key Insights & Conclusion
+---
 
-* **City Distribution:** **Hyderabad**, **Jaipur**, and **Mumbai** have the highest concentration of listed restaurants, indicating strong market demand and competition.
+## 📂 Dataset Source & Information
+The analysis is based on the [Zomato Restaurants Dataset](https://www.kaggle.com/datasets/narsingraogoud/zomato-restaurants-dataset-for-metropolitan-areas) available on Kaggle.
 
-* **Brand Presence:** National chains like **Domino's Pizza** and **McDonald's** have a significant number of outlets across multiple cities, highlighting their strong brand recognition.
+- **Scale**: 900+ restaurants, 13 cities, 123,000+ data points.
+- **Scope**: Ratings, Votes, Cuisines, Localities, Pricing, and Menu Tags.
 
-* **Customer Engagement:** Cities like **Mumbai** and **Bangalore** show very high vote counts, suggesting an active and engaged user base that provides frequent feedback.
+---
 
-* **Pricing Trends:** **Mumbai** has the highest average item price, while cities like **Kolkata** and **Lucknow** feature some of the most expensive individual dishes, often specialty or large-format items.
+## 👨‍💻 Developer & Collaboration
+Developed with a focus on **Data Intelligence & Strategic Intelligence**.
 
-* **Delivery Performance:** **Pune**, **Hyderabad**, and **Jaipur** lead with the highest average delivery ratings, indicating efficient and high-quality delivery services in these locations.
+- **Name**: Namit
+- **Role**: Data Analyst
+- **Location**: India
+- **Connect**: 
+    - [LinkedIn](https://www.linkedin.com/in/namit-nitin-chuke/)
+    - [GitHub](https://github.com/Namitchuke)
+    - [Email](mailto:namitchuke.work@gmail.com)
 
-* **Market Opportunity:** Mumbai's high customer engagement (votes) relative to its restaurant count suggests a highly active market, making it an ideal city for launching a new restaurant venture.
+---
+
+## ⚙️ Local Setup
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Namitchuke/Zomato-EDA.git
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Run the dashboard:
+   ```bash
+   streamlit run zomato_dashboard.py
+   ```
