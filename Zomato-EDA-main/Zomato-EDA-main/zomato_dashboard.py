@@ -360,7 +360,7 @@ def plotly_base() -> dict:
     )
 
 
-def h_bar(df_plot, x, y, title, text_fmt="%{text}", height=420, margin_r=70):
+def h_bar(df_plot, x, y, title, text_fmt="%{text}", height=420, margin_r=70, margin_l=160):
     """Renders a branded horizontal bar chart."""
     fig = px.bar(
         df_plot, x=x, y=y, orientation="h", title=title,
@@ -376,7 +376,7 @@ def h_bar(df_plot, x, y, title, text_fmt="%{text}", height=420, margin_r=70):
         showlegend=False,
         coloraxis_showscale=False,
         yaxis_title="",
-        margin=dict(l=10, r=margin_r, t=50, b=20),
+        margin=dict(l=margin_l, r=margin_r, t=50, b=20),
         title_font_size=15,
     )
     return fig
@@ -936,12 +936,12 @@ st.markdown("<br>", unsafe_allow_html=True)
 st.markdown(f"""
 <div style="text-align:center; color:{T_GRAY}; font-size:0.80rem;
             padding: 1.2rem 0 0.5rem 0; border-top: 1px solid #333; margin-top:2rem">
-    Built with ❤️ &nbsp;·&nbsp; Streamlit &nbsp;·&nbsp;
+    Built with ❤️, Streamlit,
     Dataset: <a href="https://www.kaggle.com/datasets/narsingraogoud/zomato-restaurants-dataset-for-metropolitan-areas"
-                style="color:{Z_RED}" target="_blank">Zomato Metropolitan Restaurants — Kaggle</a>
-    &nbsp;·&nbsp;
+                style="color:{Z_RED}" target="_blank">Zomato Kaggle Dataset</a>
+    , 
     <a href="https://github.com/Namitchuke" style="color:{Z_RED}" target="_blank">GitHub ↗</a>
-    &nbsp;·&nbsp;
+    , 
     <a href="https://www.linkedin.com/in/namit-nitin-chuke/" style="color:{Z_RED}" target="_blank">LinkedIn ↗</a>
 </div>
 """, unsafe_allow_html=True)
