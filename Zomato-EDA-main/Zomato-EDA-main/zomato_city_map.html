@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_93c3091dd6db775bb9d68b1ca32e2562 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_93c3091dd6db775bb9d68b1ca32e2562" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_93c3091dd6db775bb9d68b1ca32e2562 = L.map(
+                "map_93c3091dd6db775bb9d68b1ca32e2562",
+                {
+                    center: [22.9734, 78.6569],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 5,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_11ac4e0c897c407f207238d3ebd98d3a = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_11ac4e0c897c407f207238d3ebd98d3a.addTo(map_93c3091dd6db775bb9d68b1ca32e2562);
+        
+    
+            var circle_marker_70cf38e4fd427000d618859702bc7416 = L.circleMarker(
+                [17.385044, 78.486671],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.613, "stroke": true, "weight": 3}
+            ).addTo(map_93c3091dd6db775bb9d68b1ca32e2562);
+        
+    
+        var popup_13c45a2cbb2c273de140c4917dcdf49e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8a236350d0df4e7f7a6d3a31b1914559 = $(`<div id="html_8a236350d0df4e7f7a6d3a31b1914559" style="width: 100.0%; height: 100.0%;">Hyderabad: 15613 restaurants</div>`)[0];
+                popup_13c45a2cbb2c273de140c4917dcdf49e.setContent(html_8a236350d0df4e7f7a6d3a31b1914559);
+            
+        
+
+        circle_marker_70cf38e4fd427000d618859702bc7416.bindPopup(popup_13c45a2cbb2c273de140c4917dcdf49e)
+        ;
+
+        
+    
+    
+            var circle_marker_32efad9664f9245b7a8e119180f3e024 = L.circleMarker(
+                [26.912434, 75.78727],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.438, "stroke": true, "weight": 3}
+            ).addTo(map_93c3091dd6db775bb9d68b1ca32e2562);
+        
+    
+        var popup_3c8e15f04919611fbc3f15fa443a920a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a97c810540d5d548d02fefbc80567ce3 = $(`<div id="html_a97c810540d5d548d02fefbc80567ce3" style="width: 100.0%; height: 100.0%;">Jaipur: 14438 restaurants</div>`)[0];
+                popup_3c8e15f04919611fbc3f15fa443a920a.setContent(html_a97c810540d5d548d02fefbc80567ce3);
+            
+        
+
+        circle_marker_32efad9664f9245b7a8e119180f3e024.bindPopup(popup_3c8e15f04919611fbc3f15fa443a920a)
+        ;
+
+        
+    
+    
+            var circle_marker_9b0b08e0f7c3806e9929712d95553594 = L.circleMarker(
+                [19.07609, 72.877426],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.535, "stroke": true, "weight": 3}
+            ).addTo(map_93c3091dd6db775bb9d68b1ca32e2562);
+        
+    
+        var popup_2bd976aa94656b368adf1741a1daebb2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8b12b43272cacbcaa621f7dcd86e6a87 = $(`<div id="html_8b12b43272cacbcaa621f7dcd86e6a87" style="width: 100.0%; height: 100.0%;">Mumbai: 13535 restaurants</div>`)[0];
+                popup_2bd976aa94656b368adf1741a1daebb2.setContent(html_8b12b43272cacbcaa621f7dcd86e6a87);
+            
+        
+
+        circle_marker_9b0b08e0f7c3806e9929712d95553594.bindPopup(popup_2bd976aa94656b368adf1741a1daebb2)
+        ;
+
+        
+    
+    
+            var circle_marker_a1dcd1461de846267fc0f21f93122536 = L.circleMarker(
+                [13.08268, 80.270721],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.1, "stroke": true, "weight": 3}
+            ).addTo(map_93c3091dd6db775bb9d68b1ca32e2562);
+        
+    
+        var popup_2c45a115224271e6ea3da82b8e536cb6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c9ff38ec980eb2d78b6ab89f9e103361 = $(`<div id="html_c9ff38ec980eb2d78b6ab89f9e103361" style="width: 100.0%; height: 100.0%;">Chennai: 13100 restaurants</div>`)[0];
+                popup_2c45a115224271e6ea3da82b8e536cb6.setContent(html_c9ff38ec980eb2d78b6ab89f9e103361);
+            
+        
+
+        circle_marker_a1dcd1461de846267fc0f21f93122536.bindPopup(popup_2c45a115224271e6ea3da82b8e536cb6)
+        ;
+
+        
+    
+    
+            var circle_marker_09e715673bc71436e862134a2025b12c = L.circleMarker(
+                [12.971599, 77.594566],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.04, "stroke": true, "weight": 3}
+            ).addTo(map_93c3091dd6db775bb9d68b1ca32e2562);
+        
+    
+        var popup_bd05e4bad4833c96ae48b8f0a2a3ea78 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3a6acfbd704bb1486375caadf5abe2e9 = $(`<div id="html_3a6acfbd704bb1486375caadf5abe2e9" style="width: 100.0%; height: 100.0%;">Bangalore: 12040 restaurants</div>`)[0];
+                popup_bd05e4bad4833c96ae48b8f0a2a3ea78.setContent(html_3a6acfbd704bb1486375caadf5abe2e9);
+            
+        
+
+        circle_marker_09e715673bc71436e862134a2025b12c.bindPopup(popup_bd05e4bad4833c96ae48b8f0a2a3ea78)
+        ;
+
+        
+    
+    
+            var circle_marker_c328426655e44b9162a6d0f720a4ef26 = L.circleMarker(
+                [23.022505, 72.571362],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.178, "stroke": true, "weight": 3}
+            ).addTo(map_93c3091dd6db775bb9d68b1ca32e2562);
+        
+    
+        var popup_17a0994ee841ca97db8989f1fba66edf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a4b4b9634e894bbd4b83f11554a5effd = $(`<div id="html_a4b4b9634e894bbd4b83f11554a5effd" style="width: 100.0%; height: 100.0%;">Ahmedabad: 10178 restaurants</div>`)[0];
+                popup_17a0994ee841ca97db8989f1fba66edf.setContent(html_a4b4b9634e894bbd4b83f11554a5effd);
+            
+        
+
+        circle_marker_c328426655e44b9162a6d0f720a4ef26.bindPopup(popup_17a0994ee841ca97db8989f1fba66edf)
+        ;
+
+        
+    
+    
+            var circle_marker_9ae478507e5a485b1443b339d17ce704 = L.circleMarker(
+                [22.572645, 88.363892],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.662, "stroke": true, "weight": 3}
+            ).addTo(map_93c3091dd6db775bb9d68b1ca32e2562);
+        
+    
+        var popup_bf841265bb891cc4ae30db4a16f22f0b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0c815992c3d21e8a5596fc0d0d8e500a = $(`<div id="html_0c815992c3d21e8a5596fc0d0d8e500a" style="width: 100.0%; height: 100.0%;">Kolkata: 8662 restaurants</div>`)[0];
+                popup_bf841265bb891cc4ae30db4a16f22f0b.setContent(html_0c815992c3d21e8a5596fc0d0d8e500a);
+            
+        
+
+        circle_marker_9ae478507e5a485b1443b339d17ce704.bindPopup(popup_bf841265bb891cc4ae30db4a16f22f0b)
+        ;
+
+        
+    
+    
+            var circle_marker_9edf3bcef0cd8830164fbc7091dd50a4 = L.circleMarker(
+                [18.52043, 73.856743],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.067, "stroke": true, "weight": 3}
+            ).addTo(map_93c3091dd6db775bb9d68b1ca32e2562);
+        
+    
+        var popup_f8afc79bac2dc3c68bd102f46c0ec127 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7624d03a6ddc3a2533da4554698d46a8 = $(`<div id="html_7624d03a6ddc3a2533da4554698d46a8" style="width: 100.0%; height: 100.0%;">Pune: 8067 restaurants</div>`)[0];
+                popup_f8afc79bac2dc3c68bd102f46c0ec127.setContent(html_7624d03a6ddc3a2533da4554698d46a8);
+            
+        
+
+        circle_marker_9edf3bcef0cd8830164fbc7091dd50a4.bindPopup(popup_f8afc79bac2dc3c68bd102f46c0ec127)
+        ;
+
+        
+    
+    
+            var circle_marker_2970dd88f18ec9c00e67bec602878c05 = L.circleMarker(
+                [9.931233, 76.267303],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.759, "stroke": true, "weight": 3}
+            ).addTo(map_93c3091dd6db775bb9d68b1ca32e2562);
+        
+    
+        var popup_03f89ebbfcd0cb77cad2aa1ce938fc31 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b58e20b8fd4ba624ae511da314c9f52f = $(`<div id="html_b58e20b8fd4ba624ae511da314c9f52f" style="width: 100.0%; height: 100.0%;">Kochi: 7759 restaurants</div>`)[0];
+                popup_03f89ebbfcd0cb77cad2aa1ce938fc31.setContent(html_b58e20b8fd4ba624ae511da314c9f52f);
+            
+        
+
+        circle_marker_2970dd88f18ec9c00e67bec602878c05.bindPopup(popup_03f89ebbfcd0cb77cad2aa1ce938fc31)
+        ;
+
+        
+    
+    
+            var circle_marker_38bd3b3c1738c7745ae5ed8e1ff2b933 = L.circleMarker(
+                [21.251384, 81.629639],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.7, "stroke": true, "weight": 3}
+            ).addTo(map_93c3091dd6db775bb9d68b1ca32e2562);
+        
+    
+        var popup_bfd5caf3989f8a74b6bd9f16ccbd4cfd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1a4f9cc7e2c8df3c71d1d2e74428a7ed = $(`<div id="html_1a4f9cc7e2c8df3c71d1d2e74428a7ed" style="width: 100.0%; height: 100.0%;">Raipur: 7700 restaurants</div>`)[0];
+                popup_bfd5caf3989f8a74b6bd9f16ccbd4cfd.setContent(html_1a4f9cc7e2c8df3c71d1d2e74428a7ed);
+            
+        
+
+        circle_marker_38bd3b3c1738c7745ae5ed8e1ff2b933.bindPopup(popup_bfd5caf3989f8a74b6bd9f16ccbd4cfd)
+        ;
+
+        
+    
+    
+            var circle_marker_e4962d41572d0460a0a1ed0dc75f72a6 = L.circleMarker(
+                [26.846695, 80.946167],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.455, "stroke": true, "weight": 3}
+            ).addTo(map_93c3091dd6db775bb9d68b1ca32e2562);
+        
+    
+        var popup_11eefc41cb045b06c9459c18349ecd5c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_823e0617420cdf8958f1cef1d8e4d0d2 = $(`<div id="html_823e0617420cdf8958f1cef1d8e4d0d2" style="width: 100.0%; height: 100.0%;">Lucknow: 6455 restaurants</div>`)[0];
+                popup_11eefc41cb045b06c9459c18349ecd5c.setContent(html_823e0617420cdf8958f1cef1d8e4d0d2);
+            
+        
+
+        circle_marker_e4962d41572d0460a0a1ed0dc75f72a6.bindPopup(popup_11eefc41cb045b06c9459c18349ecd5c)
+        ;
+
+        
+    
+    
+            var circle_marker_2b5d6a9d5ee80d8e30c94e01b08cda4a = L.circleMarker(
+                [28.613939, 77.209023],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3.49, "stroke": true, "weight": 3}
+            ).addTo(map_93c3091dd6db775bb9d68b1ca32e2562);
+        
+    
+        var popup_f3512ac335b2b54c1a8966df018cf544 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4c127374699fd60a22193f785eb78a8d = $(`<div id="html_4c127374699fd60a22193f785eb78a8d" style="width: 100.0%; height: 100.0%;">New Delhi: 3490 restaurants</div>`)[0];
+                popup_f3512ac335b2b54c1a8966df018cf544.setContent(html_4c127374699fd60a22193f785eb78a8d);
+            
+        
+
+        circle_marker_2b5d6a9d5ee80d8e30c94e01b08cda4a.bindPopup(popup_f3512ac335b2b54c1a8966df018cf544)
+        ;
+
+        
+    
+    
+            var circle_marker_3be0fbf43d1366fefc5a7798efc77a03 = L.circleMarker(
+                [15.299326, 74.123993],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "cadetblue", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2.36, "stroke": true, "weight": 3}
+            ).addTo(map_93c3091dd6db775bb9d68b1ca32e2562);
+        
+    
+        var popup_1e9891a46a0f0ee89c7a4df97ce92591 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fdf14408d6f2f711e10867fae2f844f0 = $(`<div id="html_fdf14408d6f2f711e10867fae2f844f0" style="width: 100.0%; height: 100.0%;">Goa: 2360 restaurants</div>`)[0];
+                popup_1e9891a46a0f0ee89c7a4df97ce92591.setContent(html_fdf14408d6f2f711e10867fae2f844f0);
+            
+        
+
+        circle_marker_3be0fbf43d1366fefc5a7798efc77a03.bindPopup(popup_1e9891a46a0f0ee89c7a4df97ce92591)
+        ;
+
+        
+    
+</script>
+</html>
