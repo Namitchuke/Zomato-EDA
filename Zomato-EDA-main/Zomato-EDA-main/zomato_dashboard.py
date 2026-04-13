@@ -183,29 +183,31 @@ h1, h2, h3, h4 {{
 
 /* ── Insight Box ── */
 .insight-box {{
-    background: #151515;
-    border: 1px solid #333;
+    background: #252525;
     border-left: 4px solid {Z_RED};
-    border-radius: 12px;
-    padding: 1.5rem 1.8rem;
-    margin-top: 0.6rem;
+    border-radius: 0 12px 12px 0;
+    padding: 1.1rem 1.5rem;
+    margin-top: 0.4rem;
 }}
 .insight-label {{
-    font-size: 0.8rem;
+    font-size: 0.73rem;
     font-weight: 800;
-    color: {Z_RED} !important;
+    color: {Z_DARK};
     text-transform: uppercase;
-    letter-spacing: 1.2px;
-    margin-bottom: 1rem;
+    letter-spacing: 0.9px;
+    margin-bottom: 0.6rem;
     display: flex;
     align-items: center;
     gap: 0.6rem;
 }}
-.insight-list li {{ 
-    margin-bottom: 0.6rem; 
-    font-size: 1rem; 
-    color: {T_GRAY} !important;
+.insight-list {{
+    font-size: 0.91rem;
+    color: {T_DARK};
+    line-height: 1.65;
+    margin: 0;
+    padding-left: 1.2rem;
 }}
+.insight-list li {{ margin-bottom: 0.35rem; }}
 
 /* ── Sidebar ── */
 .sidebar-title {{
@@ -234,37 +236,6 @@ h1, h2, h3, h4 {{
     border: 1px solid #333;
 }}
 
-/* ── Expansion Icons ── */
-[data-testid="stExpander"] summary {{
-    color: {T_WHITE} !important;
-}}
-</style>
-
-/* ── Insight Box ── */
-.insight-box {{
-    background: {Z_LIGHT};
-    border-left: 4px solid {Z_RED};
-    border-radius: 0 12px 12px 0;
-    padding: 1.1rem 1.5rem;
-    margin-top: 0.4rem;
-}}
-.insight-label {{
-    font-size: 0.73rem;
-    font-weight: 800;
-    color: {Z_DARK};
-    text-transform: uppercase;
-    letter-spacing: 0.9px;
-    margin-bottom: 0.6rem;
-}}
-.insight-list {{
-    font-size: 0.91rem;
-    color: {T_DARK};
-    line-height: 1.65;
-    margin: 0;
-    padding-left: 1.2rem;
-}}
-.insight-list li {{ margin-bottom: 0.35rem; }}
-
 /* ── Expander ── */
 [data-testid="stExpander"] {{
     border: 1px solid #F0E6E7 !important;
@@ -277,7 +248,6 @@ h1, h2, h3, h4 {{
     font-size: 0.88rem;
 }}
 
-/* ── Divider ── */
 .z-divider {{
     height: 2px;
     background: linear-gradient(to right, {Z_RED} 0%, {Z_PINK} 60%, transparent 100%);
@@ -847,8 +817,8 @@ divider()
 section_header("clipboard-check", "Strategic Conclusion")
 
 st.markdown(f"""
-<div style="background: linear-gradient(135deg, {Z_LIGHT} 0%, {Z_WHITE} 100%);
-            border: 1px solid #F0E6E7; border-radius: 18px; padding: 2rem 2.2rem;">
+<div style="background: linear-gradient(135deg, {Z_DARK_BG} 0%, {Z_CARD_BG} 100%);
+            border: 1px solid #333; border-radius: 24px; padding: 2.2rem 2.4rem;">
     <div class="conclusion-grid">
         <div class="conclusion-card">
             <div class="conclusion-head">🏙️ Market Size & Saturation</div>
@@ -892,8 +862,8 @@ st.markdown("<br>", unsafe_allow_html=True)
 #  FOOTER
 # ──────────────────────────────────────────────────────────────
 st.markdown(f"""
-<div style="text-align:center; color:{T_MED}; font-size:0.80rem;
-            padding: 1.2rem 0 0.5rem 0; border-top: 1px solid #F0E6E7; margin-top:1rem">
+<div style="text-align:center; color:{T_GRAY}; font-size:0.80rem;
+            padding: 1.2rem 0 0.5rem 0; border-top: 1px solid #333; margin-top:2rem">
     Built with ❤️ &nbsp;·&nbsp; Streamlit &nbsp;·&nbsp;
     Dataset: <a href="https://www.kaggle.com/datasets/narsingraogoud/zomato-restaurants-dataset-for-metropolitan-areas"
                 style="color:{Z_RED}" target="_blank">Zomato Metropolitan Restaurants — Kaggle</a>
