@@ -599,24 +599,17 @@ with col2:
     cuisine_col = "Cuisine " if "Cuisine " in df.columns else "Cuisine"
     df_city_max = df.groupby(["City", cuisine_col, "Item_Name"], as_index=False)["Prices"].max()
     idx = df_city_max.groupby("City")["Prices"].idxmax()
-    max_price_df = df_city_max.loc[idx].sort_values("Prices", ascending=False)
+    max_price_df = df_city_max.loc[idx].sort_values("Prices", ascending=True)
 
-    fig_bubble = px.scatter(
-        max_price_df, x="City", y="Prices",
-        size="Prices", color="Prices",
-        hover_data=["Item_Name", cuisine_col],
-        title="Most Expensive Dish per City",
-        color_continuous_scale=[Z_PINK, Z_RED],
-        template="plotly_dark"
+    fig_max_price = h_bar(max_price_df, "Prices", "City",
+                          "Most Expensive Dish per City", text_fmt="₹%{text:.0f}", margin_r=80)
+    
+    # Add dish details to hover data
+    fig_max_price.update_traces(
+        customdata=max_price_df[["Item_Name", cuisine_col]],
+        hovertemplate="<b>%{y}</b><br>Dish: %{customdata[0]}<br>Cuisine: %{customdata[1]}<br>Price: ₹%{x}<extra></extra>"
     )
-    fig_bubble.update_layout(
-        height=420, coloraxis_showscale=False,
-        font=plotly_base()["font"],
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
-        title_font_size=15, margin=dict(t=50)
-    )
-    st.plotly_chart(fig_bubble, use_container_width=True)
+    st.plotly_chart(fig_max_price, use_container_width=True)
 
 insight_expander("Pricing Analysis", [
     "Mumbai commands the highest average item price (₹304), reflecting its affluent consumer base and premium market positioning.",
