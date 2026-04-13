@@ -712,21 +712,10 @@ with col1:
     bs_counts = df_bs["Best_Seller"].value_counts().nlargest(5).reset_index()
     bs_counts.columns = ["Category", "Count"]
 
-    fig_bs = px.pie(
-        bs_counts, values="Count", names="Category",
-        title="Top 5 Best Seller Categories",
-        color_discrete_sequence=DONUT_COLORS,
-        hole=0.42,
-    )
-    fig_bs.update_traces(
-        textinfo="percent+label",
-        pull=[0.04] * len(bs_counts),
-        marker=dict(line=dict(color=Z_WHITE, width=2)),
-    )
-    fig_bs.update_layout(
-        template="plotly_white", height=420,
-        legend=dict(orientation="v", x=1.02, y=0.5),
-        title_font_size=13,
+    fig_bs = h_bar(
+        bs_counts, "Count", "Category", 
+        "Top 5 Best Seller Categories", 
+        margin_l=180, height=400
     )
     st.plotly_chart(fig_bs, use_container_width=True)
 
@@ -739,19 +728,10 @@ with col2:
     )
     bs_ratio.columns = ["Status", "Count"]
 
-    fig_ratio = px.pie(
-        bs_ratio, values="Count", names="Status",
-        title="Tagged vs Untagged Menu Items",
-        color_discrete_sequence=[Z_RED, Z_PINK],
-        hole=0.42,
-    )
-    fig_ratio.update_traces(
-        textinfo="percent+label",
-        marker=dict(line=dict(color=Z_WHITE, width=2)),
-    )
-    fig_ratio.update_layout(
-        template="plotly_white", height=420,
-        title_font_size=13,
+    fig_ratio = h_bar(
+        bs_ratio, "Count", "Status", 
+        "Tagged vs Untagged Items", 
+        margin_l=100, height=400
     )
     st.plotly_chart(fig_ratio, use_container_width=True)
 
