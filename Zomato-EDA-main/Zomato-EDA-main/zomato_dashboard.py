@@ -162,7 +162,7 @@ h1, h2, h3, h4 {{
     gap: 0.8rem;
     border-bottom: 1px solid #333;
     padding-bottom: 0.6rem;
-    margin: 1.8rem 0 1.2rem 0;
+    margin: 0.5rem 0 1.2rem 0;
 }}
 .section-icon {{
     display: flex;
@@ -251,7 +251,7 @@ h1, h2, h3, h4 {{
 .z-divider {{
     height: 1px;
     background: linear-gradient(to right, {Z_RED} 0%, {Z_PINK} 60%, transparent 100%);
-    margin: 1.2rem 0;
+    margin: 1.2rem 0 0.5rem 0;
     border: none;
     border-radius: 2px;
     opacity: 0.5;
@@ -427,7 +427,7 @@ with st.sidebar:
         <p style="font-weight:700; color:{Z_RED}; margin-bottom:0.8rem; font-size:0.9rem">DEVELOPER CONTEXT</p>
         <div style="font-size:0.85rem; color:{T_WHITE}; line-height:1.8">
             <b>{get_icon("map-pin", Z_RED)} Based in</b>: India<br>
-            <b>{get_icon("star", Z_RED)} Expertise</b>: Data Intelligence & AI<br>
+            <b>{get_icon("star", Z_RED)} Expertise</b>: Data Analyst<br>
         </div>
     </div>
     """, unsafe_allow_html=True)
