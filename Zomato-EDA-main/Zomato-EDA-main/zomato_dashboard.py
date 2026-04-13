@@ -34,15 +34,18 @@ st.set_page_config(
 )
 
 # ──────────────────────────────────────────────────────────────
-#  BRAND TOKENS
+#  BRAND TOKENS (Dark Mode Edition)
 # ──────────────────────────────────────────────────────────────
-Z_RED    = "#E23744"
-Z_DARK   = "#CB202D"
-Z_WHITE  = "#FFFFFF"
-Z_LIGHT  = "#FFF5F6"
-Z_PINK   = "#FFB3B8"
-T_DARK   = "#1C1C1C"
-T_MED    = "#6B6B6B"
+Z_RED      = "#FF3D4E"
+Z_DARK     = "#E23744"
+Z_WHITE    = "#FFFFFF"
+Z_DARK_BG  = "#0F0F0F"
+Z_CARD_BG  = "#1A1A1A"
+Z_LIGHT    = "#252525"
+Z_PINK     = "#FFB3B8"
+T_WHITE    = "#FFFFFF"
+T_GRAY     = "#A0A0A0"
+T_DARK     = "#E5E5E5"
 
 # ──────────────────────────────────────────────────────────────
 #  GLOBAL CSS INJECTION
@@ -53,89 +56,102 @@ st.markdown(f"""
 
 /* ── Base ── */
 [data-testid="stAppViewContainer"] {{
-    background-color: {Z_WHITE};
+    background-color: {Z_DARK_BG};
     font-family: 'Outfit', sans-serif;
+    color: {T_WHITE};
 }}
 [data-testid="stHeader"]    {{ background: transparent; }}
-[data-testid="stSidebar"]   {{ background: {Z_LIGHT}; border-right: 1px solid #F0E6E7; }}
+[data-testid="stSidebar"]   {{ background: {Z_CARD_BG}; border-right: 1px solid #333; }}
 .block-container             {{ padding-top: 1.5rem; padding-bottom: 3rem; }}
+
+/* ── Text Visibility Fix ── */
+p, span, div, label {{
+    color: {T_WHITE} !important;
+}}
+h1, h2, h3, h4 {{
+    color: {T_WHITE} !important;
+}}
 
 /* ── Hero Banner ── */
 .hero-banner {{
-    background: linear-gradient(135deg, {Z_DARK} 0%, {Z_RED} 60%, #FF6B6B 100%);
-    padding: 2.8rem 3rem 2.4rem 3rem;
-    border-radius: 18px;
-    margin-bottom: 2rem;
-    color: white;
+    background: linear-gradient(135deg, #1A1A1A 0%, {Z_RED} 100%);
+    padding: 3rem 3rem;
+    border-radius: 24px;
+    margin-bottom: 2.5rem;
+    color: white !important;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(226, 55, 68, 0.2);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.05);
 }}
 .hero-title {{
-    font-size: 2.6rem;
+    font-size: 2.8rem;
     font-weight: 800;
-    letter-spacing: -0.5px;
-    margin: 0 0 0.4rem 0;
-    line-height: 1.1;
+    letter-spacing: -1px;
+    margin: 0 0 0.5rem 0;
+    color: white !important;
 }}
 .hero-sub {{
-    font-size: 1.1rem;
-    opacity: 0.95;
+    font-size: 1.15rem;
+    opacity: 0.9;
     margin: 0;
     font-weight: 500;
+    color: white !important;
 }}
 .hero-pills {{
     display: flex;
     gap: 0.8rem;
-    margin-top: 1.5rem;
+    margin-top: 1.8rem;
     flex-wrap: wrap;
 }}
 .hero-pill {{
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
     border-radius: 20px;
-    padding: 0.4rem 1.1rem;
+    padding: 0.5rem 1.2rem;
     font-size: 0.85rem;
     font-weight: 600;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
+    color: white !important;
 }}
 
 /* ── KPI Cards ── */
 .kpi-card {{
-    background: {Z_WHITE};
-    border: 1px solid #F0E6E7;
-    border-radius: 18px;
-    padding: 1.5rem 1.4rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    background: {Z_CARD_BG};
+    border: 1px solid #333;
+    border-radius: 20px;
+    padding: 1.8rem 1.4rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     text-align: center;
-    transition: all 0.3s ease;
-    margin-bottom: 0.5rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-bottom: 1rem;
 }}
 .kpi-card:hover {{
-    box-shadow: 0 12px 30px rgba(226,55,68,0.12);
-    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(255,61,78,0.15);
+    transform: translateY(-8px);
     border-color: {Z_RED};
 }}
 .kpi-icon-row {{ 
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
     display: flex;
     justify-content: center;
+    opacity: 0.9;
 }}
 .kpi-value {{
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     font-weight: 800;
-    color: {T_DARK};
+    color: {Z_RED} !important;
     margin: 0.5rem 0 0.2rem 0;
     line-height: 1;
 }}
 .kpi-label {{
-    font-size: 0.8rem;
-    color: {T_MED};
+    font-size: 0.85rem;
+    color: {T_GRAY} !important;
     text-transform: uppercase;
-    letter-spacing: 1.2px;
+    letter-spacing: 1.5px;
     font-weight: 600;
 }}
 
@@ -143,64 +159,84 @@ st.markdown(f"""
 .section-header {{
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    border-bottom: 2px solid #F0E6E7;
-    padding-bottom: 0.8rem;
-    margin: 3rem 0 1.5rem 0;
+    gap: 1rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 1rem;
+    margin: 4rem 0 2rem 0;
 }}
 .section-icon {{
     display: flex;
     align-items: center;
     justify-content: center;
     background: {Z_LIGHT};
-    padding: 0.5rem;
-    border-radius: 10px;
+    padding: 0.6rem;
+    border-radius: 12px;
+    border: 1px solid #444;
 }}
 .section-title {{
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 700;
-    color: {T_DARK};
+    color: {T_WHITE} !important;
     margin: 0;
-    letter-spacing: -0.3px;
+    letter-spacing: -0.5px;
 }}
 
 /* ── Insight Box ── */
 .insight-box {{
-    background: #FAFAFA;
-    border: 1px solid #EDEDED;
+    background: #151515;
+    border: 1px solid #333;
     border-left: 4px solid {Z_RED};
     border-radius: 12px;
-    padding: 1.3rem 1.6rem;
-    margin-top: 0.4rem;
+    padding: 1.5rem 1.8rem;
+    margin-top: 0.6rem;
 }}
 .insight-label {{
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 800;
-    color: {Z_DARK};
+    color: {Z_RED} !important;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}}
-.insight-list li {{ margin-bottom: 0.5rem; font-size: 0.95rem; }}
-
-/* ── Sidebar ── */
-.sidebar-title {{
-    color: {Z_RED};
-    font-weight: 800;
-    font-size: 1.6rem;
+    letter-spacing: 1.2px;
+    margin-bottom: 1rem;
     display: flex;
     align-items: center;
     gap: 0.6rem;
 }}
+.insight-list li {{ 
+    margin-bottom: 0.6rem; 
+    font-size: 1rem; 
+    color: {T_GRAY} !important;
+}}
+
+/* ── Sidebar ── */
+.sidebar-title {{
+    color: {Z_RED} !important;
+    font-weight: 800;
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}}
+[data-testid="stSidebar"] label {{
+    color: {T_WHITE} !important;
+}}
+[data-testid="stFileUploader"] {{
+    background: #222;
+    border-radius: 12px;
+    padding: 10px;
+}}
 
 /* ── Charts ── */
 [data-testid="stPlotlyChart"] {{
-    border-radius: 15px;
+    background: {Z_CARD_BG};
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    padding: 10px;
+    border: 1px solid #333;
+}}
+
+/* ── Expansion Icons ── */
+[data-testid="stExpander"] summary {{
+    color: {T_WHITE} !important;
 }}
 </style>
 
@@ -343,10 +379,12 @@ def divider():
 
 
 def plotly_base() -> dict:
-    """Returns base Plotly layout kwargs for consistent brand styling."""
+    """Returns base Plotly layout kwargs for Dark Mode branding."""
     return dict(
-        template="plotly_white",
-        font=dict(family="Segoe UI, system-ui, sans-serif", color=T_DARK, size=12),
+        template="plotly_dark",
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        font=dict(family="Outfit, sans-serif", color=T_WHITE, size=12),
     )
 
 
@@ -355,9 +393,9 @@ def h_bar(df_plot, x, y, title, text_fmt="%{text}", height=420):
     fig = px.bar(
         df_plot, x=x, y=y, orientation="h", title=title,
         color=x,
-        color_continuous_scale=[Z_PINK, Z_RED],
+        color_continuous_scale=[Z_RED, "#000000"],
         text=x,
-        template="plotly_white"
+        template="plotly_dark"
     )
     fig.update_traces(texttemplate=text_fmt, textposition="outside")
     fig.update_layout(
@@ -552,6 +590,7 @@ with col1:
     )
     fig_price = h_bar(avg_price_city, "Avg Price (₹)", "City",
                       "Average Item Price by City", text_fmt="₹%{text:.0f}")
+    fig_price.update_traces(marker_color=Z_RED)
     st.plotly_chart(fig_price, use_container_width=True)
 
 with col2:
@@ -565,12 +604,14 @@ with col2:
         size="Prices", color="Prices",
         hover_data=["Item_Name", cuisine_col],
         title="Most Expensive Dish per City",
-        color_continuous_scale=[Z_PINK, Z_DARK],
-        template="plotly_white"
+        color_continuous_scale=[Z_WHITE, Z_RED],
+        template="plotly_dark"
     )
     fig_bubble.update_layout(
         height=420, coloraxis_showscale=False,
         font=plotly_base()["font"],
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
         title_font_size=15, margin=dict(t=50)
     )
     st.plotly_chart(fig_bubble, use_container_width=True)
@@ -659,51 +700,6 @@ insight_expander("Customer Engagement", [
 divider()
 
 
-# ──────────────────────────────────────────────────────────────
-#  ⑦ TOP 5 RESTAURANTS PER CITY
-# ──────────────────────────────────────────────────────────────
-section_header("award", "Top 5 Most-Listed Restaurants per City")
-
-df_res_cnt = (
-    df.groupby(["City", "Restaurant_Name"]).size()
-    .reset_index(name="Count")
-)
-cities = sorted(df["City"].dropna().unique())
-
-for i in range(0, len(cities), 2):
-    pair = cities[i : i + 2]
-    cols = st.columns(len(pair))
-    for j, city in enumerate(pair):
-        with cols[j]:
-            city_data = (
-                df_res_cnt[df_res_cnt["City"] == city]
-                .nlargest(5, "Count")
-                .sort_values("Count")
-            )
-            fig_city = px.bar(
-                city_data, x="Count", y="Restaurant_Name", orientation="h",
-                title=city,
-                color_discrete_sequence=[Z_RED],
-                text="Count",
-                template="plotly_white",
-            )
-            fig_city.update_traces(textposition="outside")
-            fig_city.update_layout(
-                height=300, showlegend=False,
-                yaxis_title="", xaxis_title="Menu Listings",
-                title_font_size=14, title_font_color=T_DARK,
-                margin=dict(l=10, r=50, t=45, b=20),
-            )
-            st.plotly_chart(fig_city, use_container_width=True)
-
-insight_expander("Top Restaurants by City", [
-    "Domino's Pizza and McDonald's appear consistently across most cities, underscoring the scale advantage of national QSR chains on food delivery platforms.",
-    "Café Coffee Day also features prominently — another franchise-heavy brand that leverages branch density for platform visibility.",
-    "Local and regional chains dominate in tier-2 metros like Kochi, Raipur, and Lucknow, where national brands have lower penetration.",
-    "High listing frequency is a branch-count proxy — it signals brand reach and multi-outlet scale, not necessarily food quality or customer satisfaction.",
-])
-
-divider()
 
 
 # ──────────────────────────────────────────────────────────────
