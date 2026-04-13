@@ -159,10 +159,10 @@ h1, h2, h3, h4 {{
 .section-header {{
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.8rem;
     border-bottom: 1px solid #333;
-    padding-bottom: 1rem;
-    margin: 4rem 0 2rem 0;
+    padding-bottom: 0.6rem;
+    margin: 1.8rem 0 1.2rem 0;
 }}
 .section-icon {{
     display: flex;
@@ -249,11 +249,12 @@ h1, h2, h3, h4 {{
 }}
 
 .z-divider {{
-    height: 2px;
+    height: 1px;
     background: linear-gradient(to right, {Z_RED} 0%, {Z_PINK} 60%, transparent 100%);
-    margin: 2.4rem 0;
+    margin: 1.2rem 0;
     border: none;
     border-radius: 2px;
+    opacity: 0.5;
 }}
 
 /* ── Conclusion Grid ── */
@@ -364,7 +365,7 @@ def h_bar(df_plot, x, y, title, text_fmt="%{text}", height=420):
     fig = px.bar(
         df_plot, x=x, y=y, orientation="h", title=title,
         color=x,
-        color_continuous_scale=[Z_RED, "#000000"],
+        color_continuous_scale=[Z_PINK, Z_RED],
         text=x,
         template="plotly_dark"
     )
@@ -575,7 +576,7 @@ with col2:
         size="Prices", color="Prices",
         hover_data=["Item_Name", cuisine_col],
         title="Most Expensive Dish per City",
-        color_continuous_scale=[Z_WHITE, Z_RED],
+        color_continuous_scale=[Z_PINK, Z_RED],
         template="plotly_dark"
     )
     fig_bubble.update_layout(
