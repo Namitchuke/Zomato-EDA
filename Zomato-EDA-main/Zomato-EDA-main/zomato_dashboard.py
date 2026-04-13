@@ -29,7 +29,6 @@ from streamlit_folium import st_folium
 # ──────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Zomato EDA Dashboard",
-    page_icon="🍽️",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -50,10 +49,12 @@ T_MED    = "#6B6B6B"
 # ──────────────────────────────────────────────────────────────
 st.markdown(f"""
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
+
 /* ── Base ── */
 [data-testid="stAppViewContainer"] {{
     background-color: {Z_WHITE};
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-family: 'Outfit', sans-serif;
 }}
 [data-testid="stHeader"]    {{ background: transparent; }}
 [data-testid="stSidebar"]   {{ background: {Z_LIGHT}; border-right: 1px solid #F0E6E7; }}
@@ -68,15 +69,7 @@ st.markdown(f"""
     color: white;
     position: relative;
     overflow: hidden;
-}}
-.hero-banner::after {{
-    content: "🍽️";
-    position: absolute;
-    right: 3rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 5rem;
-    opacity: 0.15;
+    box-shadow: 0 10px 30px rgba(226, 55, 68, 0.2);
 }}
 .hero-title {{
     font-size: 2.6rem;
@@ -86,56 +79,63 @@ st.markdown(f"""
     line-height: 1.1;
 }}
 .hero-sub {{
-    font-size: 1.02rem;
-    opacity: 0.88;
+    font-size: 1.1rem;
+    opacity: 0.95;
     margin: 0;
-    font-weight: 400;
+    font-weight: 500;
 }}
 .hero-pills {{
     display: flex;
     gap: 0.8rem;
-    margin-top: 1.2rem;
+    margin-top: 1.5rem;
     flex-wrap: wrap;
 }}
 .hero-pill {{
-    background: rgba(255,255,255,0.18);
-    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
     border-radius: 20px;
-    padding: 0.3rem 0.9rem;
-    font-size: 0.82rem;
+    padding: 0.4rem 1.1rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }}
 
 /* ── KPI Cards ── */
 .kpi-card {{
     background: {Z_WHITE};
     border: 1px solid #F0E6E7;
-    border-left: 4px solid {Z_RED};
-    border-radius: 14px;
-    padding: 1.3rem 1.4rem;
-    box-shadow: 0 2px 14px rgba(226,55,68,0.07);
+    border-radius: 18px;
+    padding: 1.5rem 1.4rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
     text-align: center;
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
     margin-bottom: 0.5rem;
 }}
 .kpi-card:hover {{
-    box-shadow: 0 6px 24px rgba(226,55,68,0.14);
-    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(226,55,68,0.12);
+    transform: translateY(-4px);
+    border-color: {Z_RED};
 }}
-.kpi-icon  {{ font-size: 1.75rem; line-height: 1; }}
+.kpi-icon-row {{ 
+    margin-bottom: 0.8rem;
+    display: flex;
+    justify-content: center;
+}}
 .kpi-value {{
-    font-size: 1.95rem;
+    font-size: 2.2rem;
     font-weight: 800;
-    color: {Z_RED};
-    margin: 0.3rem 0 0.15rem 0;
+    color: {T_DARK};
+    margin: 0.5rem 0 0.2rem 0;
     line-height: 1;
 }}
 .kpi-label {{
-    font-size: 0.72rem;
+    font-size: 0.8rem;
     color: {T_MED};
     text-transform: uppercase;
-    letter-spacing: 0.9px;
+    letter-spacing: 1.2px;
     font-weight: 600;
 }}
 
@@ -143,18 +143,66 @@ st.markdown(f"""
 .section-header {{
     display: flex;
     align-items: center;
-    gap: 0.65rem;
-    border-bottom: 2.5px solid {Z_RED};
-    padding-bottom: 0.55rem;
-    margin: 2.2rem 0 1.4rem 0;
+    gap: 0.8rem;
+    border-bottom: 2px solid #F0E6E7;
+    padding-bottom: 0.8rem;
+    margin: 3rem 0 1.5rem 0;
+}}
+.section-icon {{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: {Z_LIGHT};
+    padding: 0.5rem;
+    border-radius: 10px;
 }}
 .section-title {{
-    font-size: 1.22rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: {T_DARK};
     margin: 0;
-    letter-spacing: -0.2px;
+    letter-spacing: -0.3px;
 }}
+
+/* ── Insight Box ── */
+.insight-box {{
+    background: #FAFAFA;
+    border: 1px solid #EDEDED;
+    border-left: 4px solid {Z_RED};
+    border-radius: 12px;
+    padding: 1.3rem 1.6rem;
+    margin-top: 0.4rem;
+}}
+.insight-label {{
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: {Z_DARK};
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}}
+.insight-list li {{ margin-bottom: 0.5rem; font-size: 0.95rem; }}
+
+/* ── Sidebar ── */
+.sidebar-title {{
+    color: {Z_RED};
+    font-weight: 800;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}}
+
+/* ── Charts ── */
+[data-testid="stPlotlyChart"] {{
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}}
+</style>
 
 /* ── Insight Box ── */
 .insight-box {{
@@ -232,35 +280,59 @@ st.markdown(f"""
 
 
 # ──────────────────────────────────────────────────────────────
+#  ICON SYSTEM (Lucide-inspired SVGs)
+# ──────────────────────────────────────────────────────────────
+ICONS = {
+    "store": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+    "map-pin": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+    "star": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+    "truck": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-5h-7v7Z"/><path d="M13 9h4"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>',
+    "coins": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18.06"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>',
+    "award": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>',
+    "map": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>',
+    "bar-chart-3": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>',
+    "message-square": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+    "badge-check": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>',
+    "clipboard-check": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>',
+    "lightbulb": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>',
+    "utensils": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>'
+}
+
+def get_icon(name: str, color: str = "currentColor") -> str:
+    """Returns SVG string with replaced color."""
+    return ICONS.get(name, "").replace('currentColor', color)
+
+
+# ──────────────────────────────────────────────────────────────
 #  HELPER FUNCTIONS
 # ──────────────────────────────────────────────────────────────
 
-def kpi_card(icon: str, value: str, label: str) -> str:
-    """Returns an HTML KPI card."""
+def kpi_card(icon_name: str, value: str, label: str) -> str:
+    """Returns an HTML KPI card with SVG icon."""
     return f"""
     <div class="kpi-card">
-        <div class="kpi-icon">{icon}</div>
+        <div class="kpi-icon-row">{get_icon(icon_name, Z_RED)}</div>
         <div class="kpi-value">{value}</div>
         <div class="kpi-label">{label}</div>
     </div>"""
 
 
-def section_header(emoji: str, title: str):
-    """Renders a styled section header with red underline."""
+def section_header(icon_name: str, title: str):
+    """Renders a styled section header with SVG and red underline."""
     st.markdown(f"""
     <div class="section-header">
-        <span style="font-size:1.35rem;line-height:1">{emoji}</span>
+        <div class="section-icon">{get_icon(icon_name, Z_RED)}</div>
         <p class="section-title">{title}</p>
     </div>""", unsafe_allow_html=True)
 
 
 def insight_expander(section_name: str, bullets: list):
-    """Renders a collapsible insight expander with a red-bordered insight box."""
-    with st.expander(f"📌  Analyst Insight — {section_name}", expanded=False):
+    """Renders a collapsible insight expander with a modern stylized box."""
+    with st.expander(f"Analyst Insight — {section_name}", expanded=False):
         items = "".join([f"<li>{b}</li>" for b in bullets])
         st.markdown(f"""
         <div class="insight-box">
-            <div class="insight-label">Key Observations</div>
+            <div class="insight-label">{get_icon('lightbulb', Z_DARK)} &nbsp; Key Observations</div>
             <ul class="insight-list">{items}</ul>
         </div>""", unsafe_allow_html=True)
 
@@ -285,16 +357,17 @@ def h_bar(df_plot, x, y, title, text_fmt="%{text}", height=420):
         color=x,
         color_continuous_scale=[Z_PINK, Z_RED],
         text=x,
-        **{k: v for k, v in plotly_base().items() if k != "color_discrete_sequence"},
+        template="plotly_white"
     )
     fig.update_traces(texttemplate=text_fmt, textposition="outside")
     fig.update_layout(
         height=height,
+        font=plotly_base()["font"],
         showlegend=False,
         coloraxis_showscale=False,
         yaxis_title="",
         margin=dict(l=10, r=60, t=50, b=20),
-        title_font_size=13,
+        title_font_size=15,
     )
     return fig
 
@@ -335,12 +408,12 @@ def load_and_clean(file) -> pd.DataFrame:
 #  SIDEBAR
 # ──────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown(f"<h3 style='color:{Z_RED};margin-bottom:0'>🍽️ Zomato EDA</h3>", unsafe_allow_html=True)
+    st.markdown(f'<div class="sidebar-title">{get_icon("utensils")} Zomato Analytics</div>', unsafe_allow_html=True)
     st.markdown("---")
     uploaded = st.file_uploader(
-        "Upload `zomato_dataset.csv`",
+        "Upload dataset (.csv)",
         type=["csv"],
-        help="Download from Kaggle and upload here to run the full dashboard.",
+        help="Load your dataset to refresh the live analysis.",
     )
     st.markdown("---")
     st.markdown(f"""
@@ -362,13 +435,13 @@ if uploaded is not None:
     df = load_and_clean(uploaded)
 elif os.path.exists(DEFAULT_CSV):
     df = load_and_clean(DEFAULT_CSV)
-else:
+elif uploaded is None and not os.path.exists(DEFAULT_CSV):
     st.markdown(f"""
     <div class="hero-banner" style="text-align:center">
-        <div class="hero-title">🍽️ Zomato EDA Dashboard</div>
+        <div class="hero-title">Zomato Restaurant Analytics</div>
         <div class="hero-sub" style="margin-top:.8rem">
-            A consulting-grade analysis of restaurant dynamics across 13 Indian metro cities.<br>
-            Upload the dataset from the sidebar to begin.
+            High-performance data intelligence for the Indian food service industry.<br>
+            Please upload the dataset to initialize the dashboard.
         </div>
     </div>""", unsafe_allow_html=True)
 
@@ -386,15 +459,15 @@ n_items = df["Item_Name"].nunique()
 
 st.markdown(f"""
 <div class="hero-banner">
-    <div class="hero-title">🍽️ Zomato Restaurant Analytics</div>
+    <div class="hero-title">Zomato Restaurant Analytics</div>
     <div class="hero-sub">
-        Exploratory Data Analysis · Metropolitan India · Consulting Edition
+        Advanced EDA • Metropolitan India • Professional Edition
     </div>
     <div class="hero-pills">
-        <span class="hero-pill">📋 {n_rows:,} records</span>
-        <span class="hero-pill">🏪 {n_rest:,} restaurants</span>
-        <span class="hero-pill">🌆 {n_city} cities</span>
-        <span class="hero-pill">🍲 {n_items:,} menu items</span>
+        <span class="hero-pill">{get_icon('clipboard-check', 'white')} {n_rows:,} records</span>
+        <span class="hero-pill">{get_icon('store', 'white')} {n_rest:,} restaurants</span>
+        <span class="hero-pill">{get_icon('map-pin', 'white')} {n_city} cities</span>
+        <span class="hero-pill">{get_icon('utensils', 'white')} {n_items:,} menu items</span>
     </div>
 </div>""", unsafe_allow_html=True)
 
@@ -402,7 +475,7 @@ st.markdown(f"""
 # ──────────────────────────────────────────────────────────────
 #  ② KPI CARDS  (3-col × 2 rows)
 # ──────────────────────────────────────────────────────────────
-section_header("📊", "Key Performance Indicators")
+section_header("bar-chart-3", "Key Performance Indicators")
 
 avg_dining   = df["Dining_Rating"].mean()
 avg_delivery = df["Delivery_Rating"].mean()
@@ -415,12 +488,12 @@ bs_pct       = bs_tagged / len(df) * 100
 r1c1, r1c2, r1c3 = st.columns(3)
 r2c1, r2c2, r2c3 = st.columns(3)
 
-with r1c1: st.markdown(kpi_card("🏪", f"{n_rest:,}",           "Unique Restaurants"),    unsafe_allow_html=True)
-with r1c2: st.markdown(kpi_card("🌆", f"{n_city}",             "Metro Cities"),           unsafe_allow_html=True)
-with r1c3: st.markdown(kpi_card("⭐", f"{avg_dining:.2f}",     "Avg Dining Rating"),      unsafe_allow_html=True)
-with r2c1: st.markdown(kpi_card("🚴", f"{avg_delivery:.2f}",   "Avg Delivery Rating"),    unsafe_allow_html=True)
-with r2c2: st.markdown(kpi_card("💰", f"₹{avg_price:.0f}",    "Avg Item Price"),         unsafe_allow_html=True)
-with r2c3: st.markdown(kpi_card("🏆", top_city,                "Most Listed City"),       unsafe_allow_html=True)
+with r1c1: st.markdown(kpi_card("store", f"{n_rest:,}",           "Unique Restaurants"),    unsafe_allow_html=True)
+with r1c2: st.markdown(kpi_card("map-pin", f"{n_city}",             "Metro Cities"),           unsafe_allow_html=True)
+with r1c3: st.markdown(kpi_card("star", f"{avg_dining:.2f}",     "Avg Dining Rating"),      unsafe_allow_html=True)
+with r2c1: st.markdown(kpi_card("truck", f"{avg_delivery:.2f}",   "Avg Delivery Rating"),    unsafe_allow_html=True)
+with r2c2: st.markdown(kpi_card("coins", f"₹{avg_price:.0f}",    "Avg Item Price"),         unsafe_allow_html=True)
+with r2c3: st.markdown(kpi_card("award", top_city,                "Most Listed City"),       unsafe_allow_html=True)
 
 divider()
 
@@ -428,7 +501,7 @@ divider()
 # ──────────────────────────────────────────────────────────────
 #  ③ RESTAURANT DISTRIBUTION BY CITY
 # ──────────────────────────────────────────────────────────────
-section_header("🏙️", "Restaurant Distribution by City")
+section_header("map-pin", "Restaurant Distribution by City")
 
 col1, col2 = st.columns(2)
 
@@ -467,7 +540,7 @@ divider()
 # ──────────────────────────────────────────────────────────────
 #  ④ PRICING ANALYSIS
 # ──────────────────────────────────────────────────────────────
-section_header("💰", "Pricing Analysis")
+section_header("coins", "Pricing Analysis")
 
 col1, col2 = st.columns(2)
 
@@ -493,10 +566,13 @@ with col2:
         hover_data=["Item_Name", cuisine_col],
         title="Most Expensive Dish per City",
         color_continuous_scale=[Z_PINK, Z_DARK],
-        **plotly_base(),
+        template="plotly_white"
     )
-    fig_bubble.update_layout(height=420, coloraxis_showscale=False,
-                              title_font_size=13, margin=dict(t=50))
+    fig_bubble.update_layout(
+        height=420, coloraxis_showscale=False,
+        font=plotly_base()["font"],
+        title_font_size=15, margin=dict(t=50)
+    )
     st.plotly_chart(fig_bubble, use_container_width=True)
 
 insight_expander("Pricing Analysis", [
@@ -512,7 +588,7 @@ divider()
 # ──────────────────────────────────────────────────────────────
 #  ⑤ RATINGS & DELIVERY PERFORMANCE
 # ──────────────────────────────────────────────────────────────
-section_header("⭐", "Ratings & Delivery Performance")
+section_header("star", "Ratings & Delivery Performance")
 
 col1, col2 = st.columns(2)
 
@@ -549,7 +625,7 @@ divider()
 # ──────────────────────────────────────────────────────────────
 #  ⑥ CUSTOMER ENGAGEMENT — VOTES
 # ──────────────────────────────────────────────────────────────
-section_header("📣", "Customer Engagement — Delivery & Dining Votes")
+section_header("message-square", "Customer Engagement — Delivery & Dining Votes")
 
 col1, col2 = st.columns(2)
 
@@ -586,7 +662,7 @@ divider()
 # ──────────────────────────────────────────────────────────────
 #  ⑦ TOP 5 RESTAURANTS PER CITY
 # ──────────────────────────────────────────────────────────────
-section_header("🏆", "Top 5 Most-Listed Restaurants per City")
+section_header("award", "Top 5 Most-Listed Restaurants per City")
 
 df_res_cnt = (
     df.groupby(["City", "Restaurant_Name"]).size()
@@ -633,7 +709,7 @@ divider()
 # ──────────────────────────────────────────────────────────────
 #  ⑧ BEST SELLER MENU ANALYSIS
 # ──────────────────────────────────────────────────────────────
-section_header("🥇", "Menu Category Distribution — Best Sellers")
+section_header("badge-check", "Menu Category Distribution — Best Sellers")
 
 col1, col2 = st.columns(2)
 
@@ -700,7 +776,7 @@ divider()
 # ──────────────────────────────────────────────────────────────
 #  ⑨ GEOSPATIAL MAP
 # ──────────────────────────────────────────────────────────────
-section_header("🗺️", "Geospatial Restaurant Density — India")
+section_header("map", "Geospatial Restaurant Density — India")
 
 CITY_COORDS = {
     "Hyderabad":  (17.385, 78.486),
@@ -771,7 +847,7 @@ divider()
 # ──────────────────────────────────────────────────────────────
 #  ⑩ STRATEGIC CONCLUSION
 # ──────────────────────────────────────────────────────────────
-section_header("📋", "Strategic Conclusion")
+section_header("clipboard-check", "Strategic Conclusion")
 
 st.markdown(f"""
 <div style="background: linear-gradient(135deg, {Z_LIGHT} 0%, {Z_WHITE} 100%);
