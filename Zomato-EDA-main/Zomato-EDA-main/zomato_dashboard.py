@@ -360,7 +360,7 @@ def plotly_base() -> dict:
     )
 
 
-def h_bar(df_plot, x, y, title, text_fmt="%{text}", height=420):
+def h_bar(df_plot, x, y, title, text_fmt="%{text}", height=420, margin_r=70):
     """Renders a branded horizontal bar chart."""
     fig = px.bar(
         df_plot, x=x, y=y, orientation="h", title=title,
@@ -376,7 +376,7 @@ def h_bar(df_plot, x, y, title, text_fmt="%{text}", height=420):
         showlegend=False,
         coloraxis_showscale=False,
         yaxis_title="",
-        margin=dict(l=10, r=60, t=50, b=20),
+        margin=dict(l=10, r=margin_r, t=50, b=20),
         title_font_size=15,
     )
     return fig
@@ -612,7 +612,7 @@ with col1:
         .sort_values("Delivery Rating")
     )
     fig_del = h_bar(delivery_rating, "Delivery Rating", "City",
-                    "Avg Delivery Rating by City", text_fmt="%{text:.2f} ⭐")
+                    "Avg Delivery Rating by City", text_fmt="%{text:.2f} ⭐", margin_r=100)
     st.plotly_chart(fig_del, use_container_width=True)
 
 with col2:
@@ -622,7 +622,7 @@ with col2:
         .sort_values("Dining Rating")
     )
     fig_din = h_bar(dining_rating, "Dining Rating", "City",
-                    "Avg Dining Rating by City", text_fmt="%{text:.2f} ⭐")
+                    "Avg Dining Rating by City", text_fmt="%{text:.2f} ⭐", margin_r=100)
     st.plotly_chart(fig_din, use_container_width=True)
 
 insight_expander("Ratings & Delivery Performance", [
@@ -649,7 +649,7 @@ with col1:
         .sort_values("Delivery Votes")
     )
     fig_dv = h_bar(del_votes, "Delivery Votes", "City",
-                   "Total Delivery Votes by City", text_fmt="%{text:,.0f}")
+                   "Total Delivery Votes by City", text_fmt="%{x:.3s} Votes", margin_r=110)
     st.plotly_chart(fig_dv, use_container_width=True)
 
 with col2:
@@ -659,7 +659,7 @@ with col2:
         .sort_values("Dining Votes")
     )
     fig_dnv = h_bar(din_votes, "Dining Votes", "City",
-                    "Total Dining Votes by City", text_fmt="%{text:,.0f}")
+                    "Total Dining Votes by City", text_fmt="%{x:.3s} Votes", margin_r=110)
     st.plotly_chart(fig_dnv, use_container_width=True)
 
 insight_expander("Customer Engagement", [
