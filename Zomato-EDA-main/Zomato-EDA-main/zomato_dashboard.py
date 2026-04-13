@@ -360,13 +360,15 @@ def plotly_base() -> dict:
     )
 
 
-def h_bar(df_plot, x, y, title, text_fmt="%{text}", height=420, margin_r=70, margin_l=160):
+def h_bar(df_plot, x, y, title, text_fmt="%{text}", height=420, margin_r=70, margin_l=160, text_col=None):
     """Renders a branded horizontal bar chart."""
+    if text_col is None:
+        text_col = x
     fig = px.bar(
         df_plot, x=x, y=y, orientation="h", title=title,
         color=x,
         color_continuous_scale=[Z_PINK, Z_RED],
-        text=x,
+        text=text_col,
         template="plotly_dark"
     )
     fig.update_traces(texttemplate=text_fmt, textposition="outside", cliponaxis=False)
@@ -545,8 +547,10 @@ with col1:
         .reset_index(name="Count")
         .sort_values("Count")
     )
+    total_res = res_count["Count"].sum()
+    res_count["Label"] = res_count["Count"].apply(lambda v: f"{v:,} ({v/total_res*100:.1f}%)")
     st.plotly_chart(
-        h_bar(res_count, "Count", "City", "Unique Restaurants per City"),
+        h_bar(res_count, "Count", "City", "Unique Restaurants per City", text_col="Label", margin_r=100),
         use_container_width=True,
     )
 
@@ -556,8 +560,10 @@ with col2:
         .reset_index(name="Menu Items")
         .sort_values("Menu Items")
     )
+    total_menu = menu_count["Menu Items"].sum()
+    menu_count["Label"] = menu_count["Menu Items"].apply(lambda v: f"{v/1000:.1f}k ({v/total_menu*100:.1f}%)" if v>=1000 else f"{v} ({v/total_menu*100:.1f}%)")
     st.plotly_chart(
-        h_bar(menu_count, "Menu Items", "City", "Total Menu Listings per City", text_fmt="%{x:.2s} Items", margin_r=100),
+        h_bar(menu_count, "Menu Items", "City", "Total Menu Listings per City", margin_r=100, text_col="Label"),
         use_container_width=True,
     )
 
@@ -672,8 +678,10 @@ with col1:
         .reset_index(name="Delivery Votes")
         .sort_values("Delivery Votes")
     )
+    total_del = del_votes["Delivery Votes"].sum()
+    del_votes["Label"] = del_votes["Delivery Votes"].apply(lambda v: f"{v/1e6:.2f}M ({v/total_del*100:.1f}%)" if v>=1e6 else f"{v/1000:.0f}k ({v/total_del*100:.1f}%)")
     fig_dv = h_bar(del_votes, "Delivery Votes", "City",
-                   "Total Delivery Votes by City", text_fmt="%{x:.3s} Votes", margin_r=110)
+                   "Total Delivery Votes by City", margin_r=130, text_col="Label")
     st.plotly_chart(fig_dv, use_container_width=True)
 
 with col2:
@@ -682,8 +690,10 @@ with col2:
         .reset_index(name="Dining Votes")
         .sort_values("Dining Votes")
     )
+    total_din = din_votes["Dining Votes"].sum()
+    din_votes["Label"] = din_votes["Dining Votes"].apply(lambda v: f"{v/1e6:.2f}M ({v/total_din*100:.1f}%)" if v>=1e6 else f"{v/1000:.0f}k ({v/total_din*100:.1f}%)")
     fig_dnv = h_bar(din_votes, "Dining Votes", "City",
-                    "Total Dining Votes by City", text_fmt="%{x:.3s} Votes", margin_r=110)
+                    "Total Dining Votes by City", margin_r=130, text_col="Label")
     st.plotly_chart(fig_dnv, use_container_width=True)
 
 insight_expander("Customer Engagement", [
@@ -711,11 +721,13 @@ with col1:
     df_bs = df[df["Best_Seller"] != "NA"]
     bs_counts = df_bs["Best_Seller"].value_counts().nlargest(5).reset_index()
     bs_counts.columns = ["Category", "Count"]
+    total_bs = bs_counts["Count"].sum()
+    bs_counts["Label"] = bs_counts["Count"].apply(lambda v: f"{v:,} ({v/total_bs*100:.1f}%)")
 
     fig_bs = h_bar(
         bs_counts, "Count", "Category", 
         "Top 5 Best Seller Categories", 
-        margin_l=180, height=400
+        margin_l=180, margin_r=100, height=400, text_col="Label"
     )
     st.plotly_chart(fig_bs, use_container_width=True)
 
@@ -727,11 +739,13 @@ with col2:
         .reset_index()
     )
     bs_ratio.columns = ["Status", "Count"]
+    total_ratio = bs_ratio["Count"].sum()
+    bs_ratio["Label"] = bs_ratio["Count"].apply(lambda v: f"{v/1000:.1f}k ({v/total_ratio*100:.1f}%)" if v>=1000 else f"{v:,} ({v/total_ratio*100:.1f}%)")
 
     fig_ratio = h_bar(
         bs_ratio, "Count", "Status", 
         "Tagged vs Untagged Items", 
-        margin_l=100, height=400
+        margin_l=100, margin_r=100, height=400, text_col="Label"
     )
     st.plotly_chart(fig_ratio, use_container_width=True)
 
