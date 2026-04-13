@@ -369,7 +369,7 @@ def h_bar(df_plot, x, y, title, text_fmt="%{text}", height=420, margin_r=70):
         text=x,
         template="plotly_dark"
     )
-    fig.update_traces(texttemplate=text_fmt, textposition="outside")
+    fig.update_traces(texttemplate=text_fmt, textposition="outside", cliponaxis=False)
     fig.update_layout(
         height=height,
         font=plotly_base()["font"],
@@ -418,21 +418,49 @@ def load_and_clean(file) -> pd.DataFrame:
 #  SIDEBAR
 # ──────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown(f'<div class="sidebar-title">{get_icon("utensils")} Zomato Analytics</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="sidebar-title">{get_icon("award")} Project Portfolio</div>', unsafe_allow_html=True)
     st.markdown("---")
-    uploaded = st.file_uploader(
-        "Upload dataset (.csv)",
-        type=["csv"],
-        help="Load your dataset to refresh the live analysis.",
-    )
+    
+    # Designer & Sources Section
+    st.markdown(f"""
+    <div style="background:rgba(255,61,78,0.05); border-radius:12px; padding:1.2rem; border:1px solid rgba(255,61,78,0.1)">
+        <p style="font-weight:700; color:{Z_RED}; margin-bottom:0.8rem; font-size:0.9rem">DEVELOPER CONTEXT</p>
+        <div style="font-size:0.85rem; color:{T_WHITE}; line-height:1.8">
+            <b>{get_icon("map-pin", Z_RED)} Based in</b>: India<br>
+            <b>{get_icon("star", Z_RED)} Expertise</b>: Data Intelligence & AI<br>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # Professional Links
+    st.markdown(f"""
+    <div style="display:flex; flex-direction:column; gap:0.6rem">
+        <a href="https://github.com/Namitchuke" target="_blank" style="text-decoration:none">
+            <div style="background:#222; padding:0.6rem 1rem; border-radius:8px; display:flex; align-items:center; gap:0.7rem; border:1px solid #333">
+                {get_icon("message-square", Z_RED)} <span style="color:white; font-size:0.85rem">GitHub Profile</span>
+            </div>
+        </a>
+        <a href="https://www.linkedin.com/in/namit-nitin-chuke/" target="_blank" style="text-decoration:none">
+            <div style="background:#222; padding:0.6rem 1rem; border-radius:8px; display:flex; align-items:center; gap:0.7rem; border:1px solid #333">
+                {get_icon("award", Z_RED)} <span style="color:white; font-size:0.85rem">LinkedIn Expert</span>
+            </div>
+        </a>
+        <a href="mailto:namitchuke.work@gmail.com" target="_blank" style="text-decoration:none">
+            <div style="background:#222; padding:0.6rem 1rem; border-radius:8px; display:flex; align-items:center; gap:0.7rem; border:1px solid #333">
+                {get_icon("truck", Z_RED)} <span style="color:white; font-size:0.85rem">Email Collaboration</span>
+            </div>
+        </a>
+    </div>
+    """, unsafe_allow_html=True)
+
     st.markdown("---")
     st.markdown(f"""
-    <div style="font-size:0.82rem;color:{T_GRAY};line-height:1.7">
-        <b>Dataset</b><br>
-        900+ restaurants · 13 Indian metros · 123,000+ rows<br><br>
-        <b>Source</b><br>
+    <div style="font-size:0.82rem; color:{T_GRAY}; line-height:1.7">
+        <p style="font-weight:700; color:{Z_RED}">DATA SOURCE</p>
         <a href="https://www.kaggle.com/datasets/narsingraogoud/zomato-restaurants-dataset-for-metropolitan-areas"
-           style="color:{Z_RED}" target="_blank">Kaggle ↗</a>
+           style="color:{Z_RED}; text-decoration:none" target="_blank">{get_icon("map", Z_RED)} Zomato Kaggle Dataset ↗</a>
     </div>""", unsafe_allow_html=True)
 
 
@@ -441,21 +469,17 @@ with st.sidebar:
 # ──────────────────────────────────────────────────────────────
 DEFAULT_CSV = "zomato_dataset.csv"
 
-if uploaded is not None:
-    df = load_and_clean(uploaded)
-elif os.path.exists(DEFAULT_CSV):
+if os.path.exists(DEFAULT_CSV):
     df = load_and_clean(DEFAULT_CSV)
-elif uploaded is None and not os.path.exists(DEFAULT_CSV):
+else:
     st.markdown(f"""
     <div class="hero-banner" style="text-align:center">
         <div class="hero-title">Zomato Restaurant Analytics</div>
         <div class="hero-sub" style="margin-top:.8rem">
             High-performance data intelligence for the Indian food service industry.<br>
-            Please upload the dataset to initialize the dashboard.
+            Please ensure `{DEFAULT_CSV}` is present in the project directory.
         </div>
     </div>""", unsafe_allow_html=True)
-
-    st.info(f"👈 Open the **sidebar** and upload `{DEFAULT_CSV}` or ensure it is in the project directory.")
     st.stop()
 
 
@@ -533,7 +557,7 @@ with col2:
         .sort_values("Menu Items")
     )
     st.plotly_chart(
-        h_bar(menu_count, "Menu Items", "City", "Total Menu Listings per City"),
+        h_bar(menu_count, "Menu Items", "City", "Total Menu Listings per City", text_fmt="%{x:.2s} Items", margin_r=100),
         use_container_width=True,
     )
 
@@ -612,7 +636,7 @@ with col1:
         .sort_values("Delivery Rating")
     )
     fig_del = h_bar(delivery_rating, "Delivery Rating", "City",
-                    "Avg Delivery Rating by City", text_fmt="%{text:.2f} ⭐", margin_r=100)
+                    "Avg Delivery Rating by City", text_fmt="%{text:.2f} ⭐", margin_r=140)
     st.plotly_chart(fig_del, use_container_width=True)
 
 with col2:
@@ -622,7 +646,7 @@ with col2:
         .sort_values("Dining Rating")
     )
     fig_din = h_bar(dining_rating, "Dining Rating", "City",
-                    "Avg Dining Rating by City", text_fmt="%{text:.2f} ⭐", margin_r=100)
+                    "Avg Dining Rating by City", text_fmt="%{text:.2f} ⭐", margin_r=140)
     st.plotly_chart(fig_din, use_container_width=True)
 
 insight_expander("Ratings & Delivery Performance", [
@@ -851,6 +875,53 @@ st.markdown(f"""
                 Bestseller tagging drives measurable search visibility and conversion uplift. 
                 Zomato should build gamified nudges to encourage operators to strategically 
                 tag high-performing items — directly improving platform-wide GMV.
+            </p>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+# ──────────────────────────────────────────────────────────────
+#  ⑪ UPCOMING STRATEGIES & ROADMAP
+# ──────────────────────────────────────────────────────────────
+section_header("award", "Upcoming Strategies & Forward Outlook")
+
+st.markdown(f"""
+<div style="background: linear-gradient(135deg, {Z_DARK_BG} 0%, #000000 100%);
+            border: 1px solid #333; border-radius: 24px; padding: 2.2rem 2.4rem;">
+    <div class="conclusion-grid">
+        <div class="conclusion-card">
+            <div class="conclusion-head">🤖 AI-Driven Hyper-Personalization</div>
+            <p class="conclusion-body">
+                Leveraging machine learning to predict city-specific menu trends. 
+                Integrating dynamic pricing models in mature cities like Mumbai 
+                to optimize GMV during peak demand surges.
+            </p>
+        </div>
+        <div class="conclusion-card">
+            <div class="conclusion-head">🏙️ Tier-2 Micro-Market Expansion</div>
+            <p class="conclusion-body">
+                Aggressive expansion in low-competition, high-potential hubs (Raipur, Lucknow). 
+                Focusing on exclusive partnerships with regional culinary legends to 
+                bootstrap trust and platform loyalty.
+            </p>
+        </div>
+        <div class="conclusion-card">
+            <div class="conclusion-head">🚲 Logistics Operational Rigor</div>
+            <p class="conclusion-body">
+                Replicating Pune's high-efficiency delivery playbook across the coastal belt. 
+                Reducing the dining-vs-delivery rating gap through kitchen-side tech 
+                integrations and standardized packaging audits.
+            </p>
+        </div>
+        <div class="conclusion-card">
+            <div class="conclusion-head">💎 Premium Loyalty & Retension</div>
+            <p class="conclusion-body">
+                Curating 'Must Try' selections into premium subscription tiers. 
+                Incentivizing review density in low-engagement cities through gamified 
+                customer feedback flywheels.
             </p>
         </div>
     </div>
