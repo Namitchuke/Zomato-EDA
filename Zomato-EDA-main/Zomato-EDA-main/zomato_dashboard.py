@@ -293,22 +293,23 @@ h1, h2, h3, h4 {{
     gap: 1.4rem;
 }}
 .conclusion-card {{
-    background: white;
-    border: 1px solid #F0E6E7;
-    border-radius: 14px;
-    padding: 1.4rem;
+    background: {Z_CARD_BG};
+    border: 1px solid #333;
+    border-radius: 18px;
+    padding: 1.6rem;
     border-top: 3px solid {Z_RED};
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }}
 .conclusion-head {{
     font-weight: 700;
-    color: {Z_DARK};
-    font-size: 0.95rem;
-    margin-bottom: 0.5rem;
+    color: {Z_RED};
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
 }}
 .conclusion-body {{
-    color: {T_DARK};
-    font-size: 0.88rem;
-    line-height: 1.6;
+    color: {T_GRAY};
+    font-size: 0.9rem;
+    line-height: 1.65;
     margin: 0;
 }}
 </style>
@@ -455,7 +456,7 @@ with st.sidebar:
     )
     st.markdown("---")
     st.markdown(f"""
-    <div style="font-size:0.82rem;color:{T_MED};line-height:1.7">
+    <div style="font-size:0.82rem;color:{T_GRAY};line-height:1.7">
         <b>Dataset</b><br>
         900+ restaurants · 13 Indian metros · 123,000+ rows<br><br>
         <b>Source</b><br>
