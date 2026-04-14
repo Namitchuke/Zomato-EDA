@@ -5,7 +5,7 @@
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Expert-0A66C2?style=flat&logo=linkedin)](https://www.linkedin.com/in/namit-nitin-chuke/)
 
 ##  Live Dashboard
-Explore the dashboard here: **[zomato-eda-13.streamlit.app](https://zomato-eda-13.streamlit.app/)**
+Explore the dashboard here: **[[zomato-eda-19.streamlit.app](https://zomato-eda-13.streamlit.app/)]**
 
 ---
 
