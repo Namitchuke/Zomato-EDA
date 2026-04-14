@@ -552,7 +552,7 @@ with col1:
                               title="Unique Restaurants per City")
     fig_res_tree.update_layout(template="plotly_dark", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
                                margin=dict(t=50, l=10, r=10, b=10), font=plotly_base()["font"], coloraxis_showscale=False)
-    fig_res_tree.update_traces(textinfo="label+value+percent parent")
+    fig_res_tree.update_traces(textinfo="label+value+percent parent", insidetextfont=dict(color="black"))
     st.plotly_chart(fig_res_tree, use_container_width=True)
 
 with col2:
@@ -566,7 +566,7 @@ with col2:
                                title="Total Menu Listings per City")
     fig_menu_tree.update_layout(template="plotly_dark", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
                                 margin=dict(t=50, l=10, r=10, b=10), font=plotly_base()["font"], coloraxis_showscale=False)
-    fig_menu_tree.update_traces(textinfo="label+value+percent parent")
+    fig_menu_tree.update_traces(textinfo="label+value+percent parent", insidetextfont=dict(color="black"))
     st.plotly_chart(fig_menu_tree, use_container_width=True)
 
 insight_expander("Restaurant Distribution", [
