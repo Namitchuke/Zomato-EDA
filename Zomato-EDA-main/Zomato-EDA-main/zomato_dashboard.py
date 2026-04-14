@@ -545,27 +545,27 @@ with col1:
     res_count = (
         df.groupby("City")["Restaurant_Name"].nunique()
         .reset_index(name="Count")
-        .sort_values("Count")
     )
-    total_res = res_count["Count"].sum()
-    res_count["Label"] = res_count["Count"].apply(lambda v: f"{v:,} ({v/total_res*100:.1f}%)")
-    st.plotly_chart(
-        h_bar(res_count, "Count", "City", "Unique Restaurants per City", text_col="Label", margin_r=100),
-        use_container_width=True,
-    )
+    fig_res_tree = px.treemap(res_count, path=[px.Constant("India"), "City"], values="Count",
+                              color="Count", color_continuous_scale=[Z_PINK, Z_RED],
+                              title="Unique Restaurants per City")
+    fig_res_tree.update_layout(template="plotly_dark", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
+                               margin=dict(t=50, l=10, r=10, b=10), font=plotly_base()["font"], coloraxis_showscale=False)
+    fig_res_tree.update_traces(textinfo="label+value+percent parent")
+    st.plotly_chart(fig_res_tree, use_container_width=True)
 
 with col2:
     menu_count = (
         df.groupby("City").size()
         .reset_index(name="Menu Items")
-        .sort_values("Menu Items")
     )
-    total_menu = menu_count["Menu Items"].sum()
-    menu_count["Label"] = menu_count["Menu Items"].apply(lambda v: f"{v/1000:.1f}k ({v/total_menu*100:.1f}%)" if v>=1000 else f"{v} ({v/total_menu*100:.1f}%)")
-    st.plotly_chart(
-        h_bar(menu_count, "Menu Items", "City", "Total Menu Listings per City", margin_r=100, text_col="Label"),
-        use_container_width=True,
-    )
+    fig_menu_tree = px.treemap(menu_count, path=[px.Constant("India"), "City"], values="Menu Items",
+                               color="Menu Items", color_continuous_scale=[Z_PINK, Z_RED],
+                               title="Total Menu Listings per City")
+    fig_menu_tree.update_layout(template="plotly_dark", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
+                                margin=dict(t=50, l=10, r=10, b=10), font=plotly_base()["font"], coloraxis_showscale=False)
+    fig_menu_tree.update_traces(textinfo="label+value+percent parent")
+    st.plotly_chart(fig_menu_tree, use_container_width=True)
 
 insight_expander("Restaurant Distribution", [
     "Hyderabad leads with the highest count of unique restaurants, reflecting a mature, competitive delivery market with deep platform penetration.",
@@ -628,25 +628,41 @@ section_header("star", "Ratings & Delivery Performance")
 
 col1, col2 = st.columns(2)
 
-with col1:
-    delivery_rating = (
-        df.groupby("City")["Delivery_Rating"].mean().round(2)
-        .reset_index(name="Delivery Rating")
-        .sort_values("Delivery Rating")
-    )
-    fig_del = h_bar(delivery_rating, "Delivery Rating", "City",
-                    "Avg Delivery Rating by City", text_fmt="%{text:.2f} ⭐", margin_r=140)
-    st.plotly_chart(fig_del, use_container_width=True)
+# Combined dataframe for ratings
+ratings_df = df.groupby("City")[["Dining_Rating", "Delivery_Rating"]].mean().round(2).reset_index()
+ratings_df = ratings_df.sort_values("Dining_Rating")
 
-with col2:
-    dining_rating = (
-        df.groupby("City")["Dining_Rating"].mean().round(2)
-        .reset_index(name="Dining Rating")
-        .sort_values("Dining Rating")
-    )
-    fig_din = h_bar(dining_rating, "Dining Rating", "City",
-                    "Avg Dining Rating by City", text_fmt="%{text:.2f} ⭐", margin_r=140)
-    st.plotly_chart(fig_din, use_container_width=True)
+fig_ratings = go.Figure()
+# Add horizontal lines
+for i in range(len(ratings_df)):
+    fig_ratings.add_trace(go.Scatter(
+        x=[ratings_df["Delivery_Rating"].iloc[i], ratings_df["Dining_Rating"].iloc[i]],
+        y=[ratings_df["City"].iloc[i], ratings_df["City"].iloc[i]],
+        mode="lines", line=dict(color="#555", width=2),
+        showlegend=False
+    ))
+# Add Delivery points
+fig_ratings.add_trace(go.Scatter(
+    x=ratings_df["Delivery_Rating"], y=ratings_df["City"],
+    mode="markers", marker=dict(color=Z_PINK, size=12),
+    name="Delivery Rating 🚚"
+))
+# Add Dining points
+fig_ratings.add_trace(go.Scatter(
+    x=ratings_df["Dining_Rating"], y=ratings_df["City"],
+    mode="markers", marker=dict(color=Z_RED, size=12),
+    name="Dining Rating 🍽️"
+))
+
+fig_ratings.update_layout(
+    template="plotly_dark", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+    margin=dict(l=140, r=40, t=50, b=20),
+    xaxis=dict(title="Rating ⭐", range=[3.0, 5.0]),
+    yaxis=dict(title=""),
+    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5),
+    font=plotly_base()["font"]
+)
+st.plotly_chart(fig_ratings, use_container_width=True)
 
 insight_expander("Ratings & Delivery Performance", [
     "Pune, Hyderabad, and Jaipur lead in average delivery ratings — evidence of strong last-mile logistics, partner compliance, and operational rigor.",
@@ -715,31 +731,35 @@ with col1:
     bs_counts = df_bs["Best_Seller"].value_counts().nlargest(5).reset_index()
     bs_counts.columns = ["Category", "Count"]
     total_bs = bs_counts["Count"].sum()
-    bs_counts["Label"] = bs_counts["Count"].apply(lambda v: f"{v:,} ({v/total_bs*100:.1f}%)")
+    bs_counts["Label"] = bs_counts.apply(lambda row: f"{row['Category']}<br>{row['Count']:,} ({row['Count']/total_bs*100:.1f}%)", axis=1)
 
-    fig_bs = h_bar(
-        bs_counts, "Count", "Category", 
-        "Top 5 Best Seller Categories", 
-        margin_l=180, margin_r=100, height=400, text_col="Label"
+    fig_bs = px.pie(
+        bs_counts, values="Count", names="Category", title="Top 5 Best Seller Categories",
+        color_discrete_sequence=DONUT_COLORS, hole=0.5
     )
+    fig_bs.update_traces(text=bs_counts["Label"], textinfo="text", textposition="outside", marker=dict(line=dict(color=Z_DARK_BG, width=2)))
+    fig_bs.update_layout(template="plotly_dark", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+                         showlegend=False, margin=dict(t=50, b=30, l=100, r=100), font=plotly_base()["font"])
     st.plotly_chart(fig_bs, use_container_width=True)
 
 with col2:
     bs_ratio = (
-        df["Best_Seller"]
-        .apply(lambda x: "Tagged" if x != "NA" else "Untagged")
-        .value_counts()
-        .reset_index()
+        df["Best_Seller"].apply(lambda x: "Tagged" if x != "NA" else "Untagged").value_counts().reset_index()
     )
     bs_ratio.columns = ["Status", "Count"]
     total_ratio = bs_ratio["Count"].sum()
-    bs_ratio["Label"] = bs_ratio["Count"].apply(lambda v: f"{v/1000:.1f}k ({v/total_ratio*100:.1f}%)" if v>=1000 else f"{v:,} ({v/total_ratio*100:.1f}%)")
-
-    fig_ratio = h_bar(
-        bs_ratio, "Count", "Status", 
-        "Tagged vs Untagged Items", 
-        margin_l=100, margin_r=100, height=400, text_col="Label"
+    bs_ratio["Label"] = bs_ratio.apply(
+        lambda row: f"{row['Status']}<br>{row['Count']/1000:.1f}k ({row['Count']/total_ratio*100:.1f}%)" if row['Count']>=1000 
+        else f"{row['Status']}<br>{row['Count']:,} ({row['Count']/total_ratio*100:.1f}%)", axis=1
     )
+
+    fig_ratio = px.pie(
+        bs_ratio, values="Count", names="Status", title="Tagged vs Untagged Items",
+        color_discrete_sequence=[Z_RED, Z_PINK], hole=0.5
+    )
+    fig_ratio.update_traces(text=bs_ratio["Label"], textinfo="text", textposition="outside", marker=dict(line=dict(color=Z_DARK_BG, width=2)))
+    fig_ratio.update_layout(template="plotly_dark", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+                            showlegend=False, margin=dict(t=50, b=30, l=60, r=60), font=plotly_base()["font"])
     st.plotly_chart(fig_ratio, use_container_width=True)
 
 insight_expander("Best Seller Analysis", [
