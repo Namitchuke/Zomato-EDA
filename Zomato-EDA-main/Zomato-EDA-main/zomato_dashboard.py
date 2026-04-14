@@ -546,7 +546,8 @@ with col1:
         df.groupby("City")["Restaurant_Name"].nunique()
         .reset_index(name="Count")
     )
-    fig_res_tree = px.treemap(res_count, path=[px.Constant("India"), "City"], values="Count",
+    res_count["City_Bold"] = "<b>" + res_count["City"] + "</b>"
+    fig_res_tree = px.treemap(res_count, path=[px.Constant("<b>India</b>"), "City_Bold"], values="Count",
                               color="Count", color_continuous_scale=[Z_PINK, Z_RED],
                               title="Unique Restaurants per City")
     fig_res_tree.update_layout(template="plotly_dark", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
@@ -559,7 +560,8 @@ with col2:
         df.groupby("City").size()
         .reset_index(name="Menu Items")
     )
-    fig_menu_tree = px.treemap(menu_count, path=[px.Constant("India"), "City"], values="Menu Items",
+    menu_count["City_Bold"] = "<b>" + menu_count["City"] + "</b>"
+    fig_menu_tree = px.treemap(menu_count, path=[px.Constant("<b>India</b>"), "City_Bold"], values="Menu Items",
                                color="Menu Items", color_continuous_scale=[Z_PINK, Z_RED],
                                title="Total Menu Listings per City")
     fig_menu_tree.update_layout(template="plotly_dark", paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', 
