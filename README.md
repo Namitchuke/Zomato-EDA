@@ -4,21 +4,21 @@
 [![GitHub](https://img.shields.io/badge/GitHub-Profile-181717?style=flat&logo=github)](https://github.com/Namitchuke)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Expert-0A66C2?style=flat&logo=linkedin)](https://www.linkedin.com/in/namit-nitin-chuke/)
 
-## 🚀 Live Dashboard
+##  Live Dashboard
 Explore the dashboard here: **[zomato-eda-13.streamlit.app](https://zomato-eda-13.streamlit.app/)**
 
 ---
 
-## 📊 Project Overview
+##  Project Overview
 This project delivers a **High-Performance Data Intelligence Dashboard** for analyzing the restaurant landscape across 13 Indian metropolitan areas. Leveraging a dataset of over **123,000+ rows**, the application provides actionable insights into pricing strategy, customer engagement, and operational efficiency.
 
-### 📅 About the Dataset
+###  About the Dataset
 The dataset provides a comprehensive view of the restaurant scene in the 13 metropolitan areas of India (approx. 900 key restaurants sampled). It enables the exploration of dining patterns, comparison of cuisines between cities, and identifying trends in the food industry.
 
 **Scale**: 123,000+ rows and 12 columns.
 **Dataset Link**: [Kaggle](https://www.kaggle.com/datasets/narsingraogoud/zomato-restaurants-dataset-for-metropolitan-areas)
 
-#### 📝 Data Dictionary:
+####  Data Dictionary:
 - `Restaurant_Name`: Name of the restaurant.
 - `Dining_Rating`: Customer rating for dining experience.
 - `Delivery_Rating`: Customer rating for delivery service.
@@ -32,7 +32,7 @@ The dataset provides a comprehensive view of the restaurant scene in the 13 metr
 
 ---
 
-## 🛠️ Key Features
+##  Key Features
 
 ### 1. **Data-Driven Market Intelligence**
 - **Geospatial Hotspots**: Interactive Folium maps visualizing restaurant density across India.
@@ -51,21 +51,13 @@ The dataset provides a comprehensive view of the restaurant scene in the 13 metr
 
 ---
 
-## 💻 Tech Stack
+##  Tech Stack
 - **Analysis**: Pandas, NumPy
 - **Dashboard**: Streamlit (SaaS-styled Layout)
 - **Visualization**: Plotly Express, Plotly Graph Objects
 - **Mapping**: Folium, Streamlit-Folium
 - **Deployment**: Streamlit Community Cloud
 
----
-
-## 👨‍💻 Developer & Collaboration
-Developed by **Namit**, focused on Data Intelligence & Strategic Intelligence.
-
-- **LinkedIn**: [Namit Nitin Chuke](https://www.linkedin.com/in/namit-nitin-chuke/)
-- **GitHub**: [Namitchuke](https://github.com/Namitchuke)
-- **Email**: [namitchuke.work@gmail.com](mailto:namitchuke.work@gmail.com)
 
 ---
 
